@@ -27,9 +27,9 @@
   "depends": {
     "fabricloader": ">=${fabric_loader_version}",
     "fabric-api": "*",
-    "minecraft": "~1.21.6",
+    "minecraft": "~${minecraft_version}",
     "java": ">=${java_version}",
     "cobweb": "^${cobweb_version}",
-    "forgeconfigapiport": "~21.6.0"
+    "forgeconfigapiport": "~${fcap_version}"
   }
 }
