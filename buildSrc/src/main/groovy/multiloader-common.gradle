@@ -21,7 +21,7 @@ if (minecraft_version != minecraft_target) {
     game_versions << minecraft_target
   }
 }
-game_versions = game_versions.unique()
+game_versions = game_versions.collect { String.valueOf(it) }.unique()
 
 base {
   archivesName = "$mod_id_kebab-$name"
