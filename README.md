@@ -12,7 +12,7 @@
 
 ---
 
-## **Description**
+## 📝 **Description**
 
 Multiloader skeleton for Minecraft mods!  
 Built on [Jared's MultiLoaderTemplate](https://github.com/jaredlll08/MultiLoader-Template), with the addition of:
@@ -24,7 +24,7 @@ Built on [Jared's MultiLoaderTemplate](https://github.com/jaredlll08/MultiLoader
 
 ***Note: the intended use of this template is to create a repository from it, and then update each branch with the content built by our [official generator](https://crystalnest.it/#/generator).***
 
-## **Setup completion**
+## ⚙️ **Setup completion**
 
 To complete the setup:
 
@@ -33,7 +33,7 @@ To complete the setup:
 - Check out the configuration example.
 - Update the changelog with proper release notes.
 
-## Removing Platforms and Loaders
+## 🗑️ **Removing Platforms and Loaders**
 
 While this template includes support for Fabric and NeoForge, you can easily remove support for the ones you don't need.  
 This can be done by deleting the subproject folder and then removing it from the associated `include` in the `settings.gradle` file, along with deleting the related gradle properties.
@@ -41,12 +41,12 @@ This can be done by deleting the subproject folder and then removing it from the
 The same thing applies for the different publishing platforms, Maven, GitHub, Modrinth, and CurseForge.  
 To remove support for the ones you don't need just remove the section and properties regarding them.
 
-## **License and right of use**
+## 📜 **License and right of use**
 
 Feel free to use this mod template for any mod, just be sure to give credit and possibly link [here](https://github.com/crystal-nest/cobweb-mod-template#readme).  
 This project is published under the [GNU General Public License v3.0](https://github.com/crystal-nest/cobweb-mod-template/blob/master/LICENSE).
 
-## **Support us**
+## ❤️ **Support us**
 
 <a href="https://crystalnest.it"><img alt="Crystal Nest Website" src="https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/crystal-nest/pic512.png" width="14.286%"></a><a href="https://discord.gg/BP6EdBfAmt"><img alt="Discord" src="https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/discord/discord512.png" width="14.286%"></a><a href="https://www.patreon.com/crystalspider"><img alt="Patreon" src="https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/patreon/patreon512.png" width="14.286%"></a><a href="https://ko-fi.com/crystalspider"><img alt="Ko-fi" src="https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/kofi/kofi512.png" width="14.286%"></a><a href="https://github.com/Crystal-Nest"><img alt="Our other projects" src="https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/github/github512.png" width="14.286%"><a href="https://modrinth.com/organization/crystal-nest"><img alt="Modrinth" src="https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/modrinth/modrinth512.png" width="14.286%"></a><a href="https://www.curseforge.com/members/crystalspider/projects"><img alt="CurseForge" src="https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/curseforge/curseforge512.png" width="14.286%"></a>
 
