@@ -8,6 +8,8 @@ dependencies {
   implementation "net.fabricmc:fabric-loader:$fabric_loader_version"
   implementation "net.fabricmc.fabric-api:fabric-api:$fabric_version"
   compileOnly "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:$fcap_version"
+  // Temporary runtime dependency: local Cobweb jars do not include Maven dependency metadata.
+  runtimeOnly "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:$fcap_version"
 }
 
 loom {
@@ -18,15 +20,15 @@ loom {
   runs {
     client {
       client()
-      setConfigName("Fabric Client")
-      ideConfigGenerated(true)
-      runDir("run/client")
+      setDisplayName("Fabric Client")
+      setGenerateRunConfig(true)
+      setRunDirectory("run/client")
     }
     server {
       server()
-      setConfigName("Fabric Server")
-      ideConfigGenerated(true)
-      runDir("run/server")
+      setDisplayName("Fabric Server")
+      setGenerateRunConfig(true)
+      setRunDirectory("run/server")
     }
   }
 }

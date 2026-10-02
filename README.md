@@ -2,7 +2,7 @@
 
 ---
 
-![Minecraft](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/minecraft/minecraft.svg "Minecraft")[![26.1.x](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/minecraft/26-1-x.svg "26.1.x")](https://modrinth.com/mod/cobweb-mod-template/versions?g=26.1)
+![Minecraft](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/minecraft/minecraft.svg "Minecraft")[![26.2](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/minecraft/26-2.svg "26.2")](https://modrinth.com/mod/cobweb-mod-template/versions?g=26.2)
 
 ![Loader](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/loader/loader.svg "Loader")[![NeoForge](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/loader/neoforge.svg "NeoForge")](https://modrinth.com/mod/cobweb-mod-template/versions?l=neoforge)![Separator](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/separator.svg)[![Fabric](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/loader/fabric.svg "Fabric")](https://modrinth.com/mod/cobweb-mod-template/versions?l=fabric)
 
@@ -28,7 +28,7 @@ Built on [Jared's MultiLoaderTemplate](https://github.com/jaredlll08/MultiLoader
 
 To complete the setup:
 
-- Change the [Support us](#support-us) section and the banner link.
+- Change the [Support us](#-support-us) section and the banner link.
 - Add your project CurseForge ID in the `gradle.properties`.
 - Check out the configuration example.
 - Update the changelog with proper release notes.
