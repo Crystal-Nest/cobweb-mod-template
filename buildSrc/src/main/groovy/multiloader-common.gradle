@@ -60,9 +60,7 @@ repositories {
 }
 
 dependencies {
-  // Temporary local Cobweb builds for reviewing the 26.2 port.
-  // api "it.crystalnest:cobweb-$name:$minecraft_version-$cobweb_version"
-  api files(rootProject.file(".gradle/local-cobweb/cobweb-$name-$minecraft_version-${cobweb_version}.jar"))
+  api "it.crystalnest:cobweb-$name:$minecraft_version-$cobweb_version"
 }
 
 sourcesJar {
