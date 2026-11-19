@@ -11,9 +11,7 @@ import org.jetbrains.annotations.ApiStatus;
 @Mod(Constants.MOD_ID)
 public final class ModLoader {
   /**
-   * Mod initialization.
-   *
-   * @param bus Event bus.
+   * @param bus mod event bus for loader-specific registrations.
    */
   public ModLoader(IEventBus bus) {
     CommonModLoader.init();

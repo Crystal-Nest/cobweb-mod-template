@@ -53,10 +53,6 @@ repositories {
       includeGroup "it.crystalnest"
     }
   }
-  maven {
-    name = "Fuzs Mod Resources"
-    url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
-  }
 }
 
 dependencies {
@@ -110,7 +106,6 @@ processResources {
     "fabric_loader_version"        : fabric_loader_version,
     "neoforge_version"             : neoforge_version,
     "cobweb_version"               : cobweb_version,
-    "fcap_version"                 : fcap_version,
   ]
   filesMatching(["**/pack.mcmeta", "fabric.mod.json", "META-INF/neoforge.mods.toml", "*.mixins.json"]) {
     expand expandProps
@@ -212,7 +207,6 @@ publisher {
     switch (loader) {
       case "Fabric":
         required "fabric-api"
-        required "forge-config-api-port"
         break
       case "NeoForge":
         break
@@ -223,7 +217,6 @@ publisher {
     switch (loader) {
       case "Fabric":
         required "fabric-api"
-        required "forge-config-api-port"
         break
       case "NeoForge":
         break

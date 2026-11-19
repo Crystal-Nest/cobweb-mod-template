@@ -6,29 +6,29 @@ import it.crystalnest.cobweb_mod_template.platform.services.PlatformHelper;
 import java.util.ServiceLoader;
 
 /**
- * Service loaders are a built-in Java feature that allow us to locate implementations of an interface that vary from one environment to another.
- * In the context of MultiLoader we use this feature to access a mock API in the common code that is swapped out for the platform specific implementation at runtime.
+ * Resolves common service interfaces to the implementation supplied by the active loader module.
+ * Extend this pattern when an operation needs different Fabric and NeoForge implementations.
  */
 public final class Services {
   /**
-   * Provides information about what platform the mod is running on.
+   * Example service implemented independently by Fabric and NeoForge.
    */
   public static final PlatformHelper PLATFORM = load(PlatformHelper.class);
 
   private Services() {}
 
   /**
-   * Load a service for the current environment.
-   * Service implementation must be defined manually by including a text file in META-INF/services named with the fully qualified class name of the service.
-   * Inside the file you should write the fully qualified class name of the implementation to load for the platform.
+   * Loads the implementation declared in the loader module's {@code META-INF/services} file.
+   * The file is named after the interface and contains its implementation's fully qualified class name.
    *
-   * @param clazz Class to load.
-   * @return The loaded service.
-   * @param <T> class type.
+   * @param clazz service interface to resolve.
+   * @param <T> service type.
+   * @return implementation for this loader.
+   * @throws IllegalStateException if no implementation is declared.
    */
   private static <T> T load(Class<T> clazz) {
-    final T loadedService = ServiceLoader.load(clazz).findFirst().orElseThrow(() -> new NullPointerException("Failed to load service for " + clazz.getName()));
-    Constants.LOGGER.debug("Loaded {} for service {}", loadedService, clazz);
-    return loadedService;
+    T implementation = ServiceLoader.load(clazz).findFirst().orElseThrow(() -> new IllegalStateException("Failed to load service for " + clazz.getName()));
+    Constants.LOGGER.debug("Loaded {} for service {}", implementation.getClass().getName(), clazz.getName());
+    return implementation;
   }
 }
