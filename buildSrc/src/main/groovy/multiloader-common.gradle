@@ -5,9 +5,6 @@ plugins {
 }
 
 def minecraft_target = minecraft_version + minecraft_patch_version
-def buildCommit = providers.exec {
-  commandLine 'git', 'rev-parse', 'HEAD'
-}.standardOutput.asText.get().trim()
 
 def game_versions = [minecraft_version]
 if (minecraft_patch_version) {
@@ -198,7 +195,7 @@ publisher {
     repo = "$github_user/$mod_id_kebab"
     tag = "v${project.version}"
     displayName("v${project.version}")
-    target = buildCommit
+    target = providers.gradleProperty("releaseCommit").getOrElse(minecraft_version)
     createTag = true
     createRelease = true
     updateRelease = true
