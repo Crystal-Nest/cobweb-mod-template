@@ -1,19 +1,21 @@
 package it.crystalnest.cobweb_mod_template;
 
-import it.crystalnest.cobweb_mod_template.config.ModConfig;
+import it.crystalnest.cobweb.api.platform.PlatformQueries;
+import it.crystalnest.cobweb_mod_template.platform.Services;
 import org.jetbrains.annotations.ApiStatus;
 
 /**
- * Common mod loader.
+ * Initializes shared mod functionality on both loaders.
  */
 @ApiStatus.Internal
 public final class CommonModLoader {
   private CommonModLoader() {}
 
   /**
-   * Initialize common operations across loaders.
+   * Initializes shared functionality and reports completion of common setup.
    */
   public static void init() {
-    ModConfig.CONFIG.register();
+    Constants.LOGGER.debug("Initializing {} on {} in {}", Constants.MOD_ID, PlatformQueries.loader(), PlatformQueries.environment());
+    Constants.LOGGER.debug("Initialized {} with game directory {}", Constants.MOD_ID, Services.PLATFORM.getGameDirectory());
   }
 }

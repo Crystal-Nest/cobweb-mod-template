@@ -7,7 +7,6 @@ dependencies {
   minecraft "com.mojang:minecraft:$minecraft_version$minecraft_patch_version"
   implementation "net.fabricmc:fabric-loader:$fabric_loader_version"
   implementation "net.fabricmc.fabric-api:fabric-api:$fabric_version"
-  compileOnly "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:$fcap_version"
 }
 
 loom {
@@ -18,15 +17,15 @@ loom {
   runs {
     client {
       client()
-      setConfigName("Fabric Client")
-      ideConfigGenerated(true)
-      runDir("run/client")
+      setDisplayName("Fabric Client")
+      setGenerateRunConfig(true)
+      setRunDirectory("run/client")
     }
     server {
       server()
-      setConfigName("Fabric Server")
-      ideConfigGenerated(true)
-      runDir("run/server")
+      setDisplayName("Fabric Server")
+      setGenerateRunConfig(true)
+      setRunDirectory("run/server")
     }
   }
 }
@@ -40,7 +39,7 @@ def loaderAttribute = Attribute.of("io.github.mcgradleconventions.loader", Strin
   }
 }
 sourceSets.configureEach {
-  [it.compileClasspathConfigurationName, it.runtimeClasspathConfigurationName].each { variant->
+  [it.compileClasspathConfigurationName, it.runtimeClasspathConfigurationName].each { variant ->
     configurations.named("$variant") {
       attributes {
         attribute(loaderAttribute, "fabric")

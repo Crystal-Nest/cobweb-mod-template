@@ -16,7 +16,6 @@ dependencies {
   compileOnly "org.spongepowered:mixin:0.8.7"
   compileOnly "io.github.llamalad7:mixinextras-common:0.5.3"
   annotationProcessor "io.github.llamalad7:mixinextras-common:0.5.3"
-  implementation "fuzs.forgeconfigapiport:forgeconfigapiport-common-neoforgeapi:$fcap_version"
 }
 
 configurations {
@@ -33,6 +32,24 @@ configurations {
 artifacts {
   commonJava sourceSets.main.java.sourceDirectories.singleFile
   commonResources sourceSets.main.resources.sourceDirectories.singleFile
+}
+
+def loaderAttribute = Attribute.of("io.github.mcgradleconventions.loader", String)
+["apiElements", "runtimeElements", "sourcesElements", "javadocElements"].each { variant ->
+  configurations.named("$variant") {
+    attributes {
+      attribute(loaderAttribute, "common")
+    }
+  }
+}
+sourceSets.configureEach {
+  [it.compileClasspathConfigurationName, it.runtimeClasspathConfigurationName].each { variant ->
+    configurations.named("$variant") {
+      attributes {
+        attribute(loaderAttribute, "common")
+      }
+    }
+  }
 }
 
 // Disable publishing tasks where common is not published

@@ -5,23 +5,21 @@ plugins {
 }
 
 def minecraft_target = minecraft_version + minecraft_patch_version
+def buildCommit = providers.exec {
+  commandLine 'git', 'rev-parse', 'HEAD'
+}.standardOutput.asText.get().trim()
+def buildTimestamp = new Date(providers.exec {
+  commandLine 'git', 'log', '-1', '--format=%ct'
+}.standardOutput.asText.get().trim().toLong() * 1000L)
 
 def game_versions = [minecraft_version]
-if (minecraft_version != minecraft_target) {
-  def minParts = minecraft_version.tokenize('.')
-  def maxParts = minecraft_target.tokenize('.')
-  if (minParts.size() >= 2 && maxParts.size() >= 2) {
-    def base = "${minParts[0]}.${minParts[1]}"
-    int minPatch = minParts.size() > 2 ? minParts[2].toInteger() : 0
-    int maxPatch = maxParts.size() > 2 ? maxParts[2].toInteger() : 0
-    for (int i = minPatch + 1; i <= maxPatch; i++) {
-      game_versions << "${base}.${i}"
-    }
-  } else {
-    game_versions << minecraft_target
+if (minecraft_patch_version) {
+  int targetPatch = minecraft_patch_version.substring(1).toInteger()
+  for (int patch = 1; patch < targetPatch; patch++) {
+    game_versions << "${minecraft_version}.${patch}".toString()
   }
+  game_versions << minecraft_target
 }
-game_versions = game_versions.collect { String.valueOf(it) }.unique()
 
 base {
   archivesName = "$mod_id_kebab-$name"
@@ -61,10 +59,6 @@ repositories {
       includeGroup "it.crystalnest"
     }
   }
-  maven {
-    name = "Fuzs Mod Resources"
-    url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
-  }
 }
 
 dependencies {
@@ -90,8 +84,8 @@ jar {
       "Implementation-Vendor"   : mod_authors,
       "Implementation-Version"  : project.version,
       "Implementation-URL"      : "https://github.com/$github_user/$mod_id_kebab/tree/$minecraft_version",
-      "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-      "Timestamp"               : System.currentTimeMillis(),
+      "Implementation-Timestamp": buildTimestamp.format("yyyy-MM-dd'T'HH:mm:ssZ", TimeZone.getTimeZone('UTC')),
+      "Timestamp"               : buildTimestamp.time,
       "Built-On-Java"           : "${System.getProperty('java.vm.version')} (${System.getProperty('java.vm.vendor')})",
       "Built-On-Minecraft"      : minecraft_target
     ])
@@ -117,8 +111,8 @@ processResources {
     "fabric_version"               : fabric_version,
     "fabric_loader_version"        : fabric_loader_version,
     "neoforge_version"             : neoforge_version,
+    "neoforge_min_version"         : neoforge_min_version,
     "cobweb_version"               : cobweb_version,
-    "fcap_version"                 : fcap_version,
   ]
   filesMatching(["**/pack.mcmeta", "fabric.mod.json", "META-INF/neoforge.mods.toml", "*.mixins.json"]) {
     expand expandProps
@@ -203,13 +197,13 @@ publisher {
   }
   setGameVersions(game_versions.toArray(new String[0]))
   setDisplayName("[$loader - $minecraft_version] $mod_title v$mod_version")
-  setJavaVersions([JavaVersion.VERSION_25]) // Remember to update this to match java_version gradle property.
+  setJavaVersions([JavaVersion.toVersion(java_version)])
   setCurseEnvironment("both") // "server", "client" or "both".
   github {
     repo = "$github_user/$mod_id_kebab"
     tag = "v${project.version}"
     displayName("v${project.version}")
-    target = minecraft_version
+    target = buildCommit
     createTag = true
     createRelease = true
     updateRelease = true
@@ -220,7 +214,6 @@ publisher {
     switch (loader) {
       case "Fabric":
         required "fabric-api"
-        required "forge-config-api-port"
         break
       case "NeoForge":
         break
@@ -231,7 +224,6 @@ publisher {
     switch (loader) {
       case "Fabric":
         required "fabric-api"
-        required "forge-config-api-port"
         break
       case "NeoForge":
         break
